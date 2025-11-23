@@ -22,12 +22,58 @@ public static double[][] idw(double[][] data) {
 	double [][] result = new double [row][col];
 	
 	//for loop iterates through all values in the 2D input array
-	for (int rowNumber = 0; rowNumber < row; rowNumber++) {
-		for (int colNumber = 0; colNumber < col; colNumber++) {
-			result[rowNumber][colNumber] = data[rowNumber][colNumber];
+	for (int x = 0; x < row; x++) {
+		for (int y = 0; y < col; y++) {
+			
+			//declare and assign variable for each value at x,y position
+			double value = data[x][y];
+			
+			//check if value is NOT NaN and then copy to result
+			if (!Double.isNaN(value)) {
+				result [x][y] = value;
+			}
+			
+			//check if value IS NaN and calculate euclidian distance and IDW interpolation
+			else {
+				double weightedSum = 0.0;
+				double weightTotal = 0.0;
+				
+				//iterate through the array again but skip NaN values, same for-loop as before with different variable names
+				for (int x_notNAN = 0; x_notNAN < row; x_notNAN++) {
+					for (int y_notNAN = 0; y_notNAN < col; y_notNAN++) {
+						
+						//declare and assign variable to not NAN values
+						double neighbor_notNAN = data[x_notNAN][y_notNAN];
+						
+						//skip NAN values
+						if (Double.isNaN(neighbor_notNAN))
+							continue;
+						
+						//calculate euclidian distance from value to all neighbors that are not NAN with the formula provided in the task sheet
+						//Math.sqrt takes the square root, Math.pow takes the base and exponent
+						double distance = Math.sqrt(Math.pow(x - x_notNAN, 2) + Math.pow(y - y_notNAN, 2));
+						
+						//if distance is zero, the loop continues
+						if (distance == 0)
+							continue;
+						
+						//calculate weight according to formula weight = 1 / distance²
+						double weight = 1.0 / Math.pow(distance, 2);
+						
+						//NUMERATOR: multiply weight with neighbor and add it, += does assign and add the value of the expression at once
+						weightedSum += weight * neighbor_notNAN;
+						
+						//DENOMINATOR: take sum off all weights
+						weightTotal += weight;
+					}
+				}
+			}
+			
+			//has to be replaced by array with interpolated values!!!
+			result[x][y] = data[x][y];
 		}
-	}
 	
+	}
 	
 	return result;
 }
