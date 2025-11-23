@@ -67,26 +67,36 @@ public static double[][] idw(double[][] data) {
 						weightTotal += weight;
 					}
 				}
-			}
 			
-			//has to be replaced by array with interpolated values!!!
-			result[x][y] = data[x][y];
+			
+			//replace NaN values with interpolated values
+			//final step of formula (weightedSum / weightTotal)
+			if (weightTotal > 0) {
+				result[x][y] = weightedSum / weightTotal;
+			}
 		}
 	
 	}
+}
 	
-	return result;
+return result;
+
 }
 
+//add main method to try function
 public static void main (String[] args) {
 	
+	//example 2d array
 	double[][] grid = {
 			{1.0, Double.NaN, 3.0},
 			{Double.NaN, Double.NaN, 2.0},
 			{4.0, 5.0, Double.NaN}
 	};
 	
+	//declaring and assinging new variable to try out idw function
 	double[][] interpolatedGrid = idw(grid);
+	
+	//print result
 	System.out.println(Arrays.deepToString(interpolatedGrid));
 	}
 }
