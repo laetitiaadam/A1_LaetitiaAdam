@@ -1,4 +1,4 @@
-//Assignment 1, Practice Software Development
+//Assignment 2, Practice Software Development
 //Due date: 30th of December, 2025
 //Author: Laetitia Adam
 
@@ -12,17 +12,17 @@ public class Main {
 	//add main method to try function
 	public static void main (String[] args) {
 		
-		//example 2d array
+		//example 2D-array 
 		double[][] grid = {
 				{1.0, Double.NaN, 3.0},
 				{Double.NaN, Double.NaN, 2.0},
 				{4.0, 5.0, Double.NaN}
 		};
 		
-		//declaring and assinging new variable to try out idw function
+		//declaring and assigning new variable that stores the result of the idw function
 		double[][] interpolatedGrid = idw(grid);
 		
-		//print result
+		//print result using the imported Arrays class to make result readable
 		System.out.println(Arrays.deepToString(interpolatedGrid));
 		}
 	
@@ -38,20 +38,21 @@ public static double[][] idw(double[][] data) {
 	//result is a newly created 2D array based on the previously identified number of rows and columns. It is assuming that all rows have the same number of columns. 
 	double [][] result = new double [row][col];
 	
-	//for loop iterates through all values in the 2D input array
+	//for-loop iterates through all values in the 2D input array
 	for (int x = 0; x < row; x++) {
 		for (int y = 0; y < col; y++) {
 			
-			//declare and assign variable for each value at x,y position
+			//declare and assign variable for value at x,y position
 			double value = data[x][y];
 			
-			//check if value is NOT NaN and then copy to result
+			//check if value is NOT NaN and then copy to result, the ! inverts is.NaN
 			if (!Double.isNaN(value)) {
 				result [x][y] = value;
 			}
 			
 			//check if value IS NaN and calculate euclidian distance and IDW interpolation
 			else {
+				//declaring and assigning variables for the weighted sum and total sum for later use
 				double weightedSum = 0.0;
 				double weightTotal = 0.0;
 				
