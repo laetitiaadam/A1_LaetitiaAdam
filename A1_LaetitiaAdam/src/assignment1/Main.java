@@ -6,8 +6,25 @@ package assignment1;
 
 import java.util.Arrays; //this class helps to convert Array into readable text
 
-//constructor for IDW_calculation class
-public class IDW_calculation {
+//constructor for main class
+public class Main {
+	
+	//add main method to try function
+	public static void main (String[] args) {
+		
+		//example 2d array
+		double[][] grid = {
+				{1.0, Double.NaN, 3.0},
+				{Double.NaN, Double.NaN, 2.0},
+				{4.0, 5.0, Double.NaN}
+		};
+		
+		//declaring and assinging new variable to try out idw function
+		double[][] interpolatedGrid = idw(grid);
+		
+		//print result
+		System.out.println(Arrays.deepToString(interpolatedGrid));
+		}
 	
 	
 //method for IDW calculation taken from task sheet	
@@ -83,21 +100,6 @@ return result;
 
 }
 
-//add main method to try function
-public static void main (String[] args) {
-	
-	//example 2d array
-	double[][] grid = {
-			{1.0, Double.NaN, 3.0},
-			{Double.NaN, Double.NaN, 2.0},
-			{4.0, 5.0, Double.NaN}
-	};
-	
-	//declaring and assinging new variable to try out idw function
-	double[][] interpolatedGrid = idw(grid);
-	
-	//print result
-	System.out.println(Arrays.deepToString(interpolatedGrid));
-	}
+
 }
 
