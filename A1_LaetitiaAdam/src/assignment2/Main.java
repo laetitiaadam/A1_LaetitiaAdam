@@ -2,7 +2,7 @@
 //Due date: 30th of December, 2025
 //Author: Laetitia Adam
 
-package assignment1;
+package assignment2;
 
 import java.util.Arrays; //this class helps to convert Array into readable text
 
